@@ -1,0 +1,18 @@
+---
+# tasks file for ansible-powerdns
+- include: debian.yml
+  when: ansible_os_family == "Debian"
+
+- include: centos.yml
+  when: ansible_os_family == "RedHat"
+
+- include: a-createnative.yml
+  tags: [pdns_create_zones]
+  when: "pdns_create_zones and zone_types == 'native' and 'nameservers' in group_names"
+
+- include: remove_logstash.yml
+  when: not install_logstash
+
+- include: cron.yml
+  tags: [cron]
+  when: enable_pdns_anycast is defined and enable_pdns_anycast
