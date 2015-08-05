@@ -24,28 +24,36 @@
 
 - name: debian_pdns | creating powerdns db
   mysql_db: name={{ pdns_db_name }} state=present
-  when: mysql_master
+  when: not pdns_db_cluster
+
+- name: debian_pdns | creating powerdns db
+  mysql_db: name={{ pdns_db_name }} state=present
+  run_once: true
+  when: pdns_db_cluster
 
 - name: debian_pdns | creating powerdns user
   mysql_user: name={{ pdns_db_user }} password={{ pdns_db_pass }} priv={{ pdns_db_name }}.*:ALL state=present
-  when: mysql_master
+  when: not pdns_db_cluster
+
+- name: debian_pdns | creating powerdns user
+  mysql_user: name={{ pdns_db_user }} password={{ pdns_db_pass }} priv={{ pdns_db_name }}.*:ALL state=present
+  run_once: true
+  when: pdns_db_cluster
 
 - name: debian_pdns | copying db schema file
   copy: src=db_schema dest=/tmp
-  when: mysql_master
 
 - name: debian_pdns | checking for existing db schema import
   stat: path=/var/log/db_schema_imported
   register: db_schema_imported
-  when: mysql_master
 
 - name: debian_pdns | importing db schema
   mysql_db: name={{ pdns_db_name }} state=import target=/tmp/db_schema
-  when: mysql_master and db_schema_imported.stat.exists != True
+  when: db_schema_imported.stat.exists != True
 
 - name: debian_pdns | marking db schema as imported
   file: path=/var/log/db_schema_imported state=touch
-  when: mysql_master and db_schema_imported.stat.exists != True
+  when: db_schema_imported.stat.exists != True
 
 - name: debian_pdns | installing poweradmin pre-reqs
   apt: name={{ item }} state=present

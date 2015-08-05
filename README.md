@@ -37,6 +37,7 @@ pdns_create_rev_zones: ''  #defined in group_vars/ip-services
 #  - 101.0.10
 pdns_create_zones: false  # set to false if you do not want to create zones... defined in group_vars/ip-services
 pdns_curl_header: "-H 'X-API-Key: {{ pdns_api_key }}'"
+pdns_db_cluster: false  #defines if backend db for pdns is clustered...define here or in group_vars/group
 pdns_db_host: localhost
 pdns_db_name: powerdns  #define here or globally in group_vars/group
 pdns_db_pass: powerdns  #define here or globally in group_vars/group
