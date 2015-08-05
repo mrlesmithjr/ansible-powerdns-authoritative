@@ -2,7 +2,7 @@
 allow_ddns_updates: false  #define here or globally in group_vars/group
 allow_ddns_updates_from: 0.0.0.0/0  #defines subnet to allow DDNS updates from if allowed...define here or globally in group_vars/group
 config_logstash: false  #defines if logstash should be configured if installed...define here or globally in group_vars/group
-dns_hostmaster: 'hostmaster.{{ pri_domain_name }}'  define here or globally in group_vars/group
+dns_hostmaster: 'hostmaster.{{ pri_domain_name }}'  #define here or globally in group_vars/group
 enable_pdns_anycast: false  #define here or globally in group_vars/group
 enable_pdns_recursive_lookups: true  #define here or globally in group_vars/group
 enable_pdns_server_logging: false  #define here or globally in group_vars/group
