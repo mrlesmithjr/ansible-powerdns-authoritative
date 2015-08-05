@@ -49,7 +49,12 @@
 
 - name: debian_pdns | importing db schema
   mysql_db: name={{ pdns_db_name }} state=import target=/tmp/db_schema
-  when: db_schema_imported.stat.exists != True
+  when: not pdns_db_cluster and db_schema_imported.stat.exists != True
+
+- name: debian_pdns | importing db schema
+  mysql_db: name={{ pdns_db_name }} state=import target=/tmp/db_schema
+  run_once: true
+  when: pdns_db_cluster and db_schema_imported.stat.exists != True
 
 - name: debian_pdns | marking db schema as imported
   file: path=/var/log/db_schema_imported state=touch
