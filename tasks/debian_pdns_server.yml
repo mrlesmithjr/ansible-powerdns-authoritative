@@ -15,6 +15,11 @@
 - name: debian_pdns | configuring powerdns
   template: src=pdns.conf.j2 dest=/etc/powerdns/pdns.conf owner=root group=root
   notify: restart_pdns
+  register: pdns_configured
+
+- name: debian_pdns | restarting powerdns
+  service: name=pdns state=restarted
+  when: pdns_configured.changed
 
 - name: debian_pdns | installing powerdns pre-reqs
   apt: name={{ item }} state=present force=yes
