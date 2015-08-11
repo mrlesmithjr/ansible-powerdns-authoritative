@@ -13,7 +13,7 @@
   notify: restart_pdns_recursor
 
 - name: debian_pdns_recursor | configuring powerdns recursor
-  template: src=recursor.conf.j2 dest=/etc/powerdns/recursor.conf owner=root group=root
+  template: src=etc/powerdns/recursor.conf.j2 dest=/etc/powerdns/recursor.conf owner=root group=root
   notify: restart_pdns_recursor
   register: pdns_recursor_configured
 
