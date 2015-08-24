@@ -32,6 +32,7 @@ pdns_db_user: powerdns  #define here or globally in group_vars/group
 pdns_default_soa_mail: 'hostmaster.{{ pri_domain_name }}' #define here or globally in group_vars/group
 pdns_default_soa_name: '{{ ansible_hostname }}.{{ pri_domain_name }}' #define here or globally in group_vars/group
 pdns_json_interface: true
+pdns_recursive_source_ip: false  #defines if source IP address should be defined for recursive queries...default is 0.0.0.0
 pdns_recursor_host: 127.0.0.1  #should be 127.0.0.1 unless recursor is running on a separate host
 pdns_recursor_port: 5300  #port pdns_recursor should listen on...default is 53 but needs to be changed to run both pdns services on same host
 pdns_recursor_version: 3.7.3-1

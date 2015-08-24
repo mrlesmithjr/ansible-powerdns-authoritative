@@ -12,10 +12,11 @@ Role Variables
 --------------
 
 ````
+---
 allow_ddns_updates: false  #define here or globally in group_vars/group
 allow_ddns_updates_from: 0.0.0.0/0  #defines subnet to allow DDNS updates from if allowed...define here or globally in group_vars/group
 config_logstash: false  #defines if logstash should be configured if installed...define here or globally in group_vars/group
-dns_hostmaster: 'hostmaster.{{ pri_domain_name }}'  define here or globally in group_vars/group
+dns_hostmaster: 'hostmaster.{{ pri_domain_name }}'  #define here or globally in group_vars/group
 enable_pdns_anycast: false  #define here or globally in group_vars/group
 enable_pdns_recursive_lookups: true  #define here or globally in group_vars/group
 enable_pdns_server_logging: false  #define here or globally in group_vars/group
@@ -45,6 +46,7 @@ pdns_db_user: powerdns  #define here or globally in group_vars/group
 pdns_default_soa_mail: 'hostmaster.{{ pri_domain_name }}' #define here or globally in group_vars/group
 pdns_default_soa_name: '{{ ansible_hostname }}.{{ pri_domain_name }}' #define here or globally in group_vars/group
 pdns_json_interface: true
+pdns_recursive_source_ip: false  #defines if source IP address should be defined for recursive queries...default is 0.0.0.0
 pdns_recursor_host: 127.0.0.1  #should be 127.0.0.1 unless recursor is running on a separate host
 pdns_recursor_port: 5300  #port pdns_recursor should listen on...default is 53 but needs to be changed to run both pdns services on same host
 pdns_recursor_version: 3.7.3-1
