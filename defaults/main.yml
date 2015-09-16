@@ -36,7 +36,7 @@ pdns_recursive_source_ip: false  #defines if source IP address should be defined
 pdns_recursor_host: 127.0.0.1  #should be 127.0.0.1 unless recursor is running on a separate host
 pdns_recursor_port: 5300  #port pdns_recursor should listen on...default is 53 but needs to be changed to run both pdns services on same host
 pdns_recursor_version: 3.7.3-1
-pdns_server_version: 3.4.5-1
+pdns_server_version: 3.4.6-1
 pdns_webserver_address: 0.0.0.0
 pdns_webserver_allow: '0.0.0.0/0,::/0'
 pdns_webserver_password: []  #define here or globally in group_vars/group
