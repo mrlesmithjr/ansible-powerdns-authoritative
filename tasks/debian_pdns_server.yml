@@ -24,6 +24,7 @@
 - name: debian_pdns | installing powerdns pre-reqs
   apt: name={{ item }} state=present force=yes
   with_items:
+    - git
     - jq
     - python-mysqldb
 
