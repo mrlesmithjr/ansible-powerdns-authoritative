@@ -8,7 +8,7 @@
 
 - include: a-createnative.yml
   tags: [pdns_create_zones]
-  when: "pdns_create_zones and zone_types == 'native' and 'nameservers' in group_names"
+  when: "pdns_create_zones and zone_types == 'native'"
 
 - include: remove_logstash.yml
   when: not install_logstash
