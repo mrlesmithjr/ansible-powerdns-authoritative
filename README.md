@@ -3,6 +3,8 @@ Role Name
 
 Installs PowerDNS https://www.powerdns.com/ (MySQL cluster ready)
 
+[![Build Status](https://travis-ci.org/mrlesmithjr/ansible-powerdns.svg)](https://travis-ci.org/mrlesmithjr/ansible-powerdns)
+
 Requirements
 ------------
 
