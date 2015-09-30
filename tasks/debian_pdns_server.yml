@@ -95,6 +95,8 @@
 
 - name: debian_pdns | enabling php mcrypt module
   command: php5enmod mcrypt
+  args:
+    creates: /etc/php5/cli/conf.d/20-mcrypt.ini
   notify: restart_apache2
 
 - name: debian_pdns | downloading poweradmin
