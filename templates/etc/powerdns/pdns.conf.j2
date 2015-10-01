@@ -229,7 +229,7 @@ experimental-json-interface=yes
 #
 # local-address=0.0.0.0
 {% if enable_pdns_anycast is defined and enable_pdns_anycast %}
-local-address=127.0.0.1,{{ pri_dns }},{{ sec_dns }}
+local-address=127.0.0.1,{{ pri_dns }},{{ sec_dns }},{{ ansible_default_ipv4.address }}
 {% endif %}
 
 #################################
