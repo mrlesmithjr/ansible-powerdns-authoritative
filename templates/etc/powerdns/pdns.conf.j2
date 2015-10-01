@@ -231,6 +231,9 @@ experimental-json-interface=yes
 {% if enable_pdns_anycast is defined and enable_pdns_anycast %}
 local-address=127.0.0.1,{{ pri_dns }},{{ sec_dns }},{{ ansible_default_ipv4.address }}
 {% endif %}
+{% if (enable_pdns_anycast is defined and not enable_pdns_anycast) or enable_pdns_anycast is not defined %}
+local-address=127.0.0.1,{{ ansible_default_ipv4.address }}
+{% endif %}
 
 #################################
 # local-address-nonexist-fail	Fail to start if one or more of the local-address's do not exist on this server
