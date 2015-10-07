@@ -16,6 +16,7 @@
 - name: pdns_zones | creating pdns zones folders
   file: path={{ pdns_zones_dir }}/{{ item }} state=directory
   delegate_to: localhost
+  run_once: true
   sudo: false
   with_items:
     - "{{ pdns_fwd_zones }}"
@@ -25,6 +26,7 @@
 - name: pdns_zones | creating pdns forward/reverse zones in zone folders
   template: src=pdns_zones.j2 dest={{ pdns_zones_dir }}/{{ item }}/{{ item }}_zone
   delegate_to: localhost
+  run_once: true
   sudo: false
   register: pdns_zones_created
   with_items:
@@ -34,6 +36,7 @@
 
 - name: pdns_zones | creating pdns zones
   command: "curl -X POST -H 'X-API-KEY: {{ pdns_api_key }}' --data @{{ pdns_zones_dir }}/{{ item }}/{{ item }}_zone http://{{ pdns_webserver }}:{{ pdns_webserver_port }}/servers/localhost/zones"
+  run_once: true
   with_items:
     - "{{ pdns_fwd_zones }}"
     - "{{ pdns_rev_zones }}"
