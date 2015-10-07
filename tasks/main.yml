@@ -16,6 +16,11 @@
     - cron
   when: enable_pdns_anycast is defined and enable_pdns_anycast
 
+- include: pdns_zones.yml
+  tags:
+    - create_pdns_zones
+  when: pdns_create_zones is defined and pdns_create_zones
+
 - include: pdns_records.yml
   tags:
     - create_pdns_records
