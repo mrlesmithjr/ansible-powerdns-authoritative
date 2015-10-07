@@ -31,7 +31,6 @@ install_pdns_server: true  #defines if authoriative dns server is to be installe
 install_poweradmin: false  #use NSEDIT instead
 pdns_api_key: changeme  #define here or globally in group_vars/all/accounts
 pdns_api_url: http://127.0.0.1:8081/servers/localhost/zones
-pdns_create_zones: false  # set to false if you do not want to create zones... defined in group_vars/ip-services
 pdns_curl_header: "-H 'X-API-Key: {{ pdns_api_key }}'"
 pdns_db_cluster: false  #defines if backend db for pdns is clustered...define here or in group_vars/group
 pdns_db_host: localhost
