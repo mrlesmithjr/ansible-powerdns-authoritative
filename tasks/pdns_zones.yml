@@ -2,6 +2,7 @@
 - name: ensuring pdns zone folder exists
   file: path={{ pdns_zones_dir }} state=directory
   delegate_to: localhost
+  run_once: true
   sudo: false
 
 - name: creating pdns zones folders
