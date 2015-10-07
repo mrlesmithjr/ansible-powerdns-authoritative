@@ -9,8 +9,8 @@
   delegate_to: localhost
   sudo: false
   with_items:
-    - pdns_fwd_zones
-    - pdns_rev_zones
+    - "{{ pdns_fwd_zones }}"
+    - "{{ pdns_rev_zones }}"
   when: pdns_fwd_zones is defined or pdns_rev_zones is defined
 
 - name: creating pdns forward/reverse zones in zone folders
@@ -19,13 +19,13 @@
   sudo: false
   register: pdns_zones_created
   with_items:
-    - pdns_fwd_zones
-    - pdns_rev_zones
+    - "{{ pdns_fwd_zones }}"
+    - "{{ pdns_rev_zones }}"
   when: pdns_fwd_zones is defined or pdns_rev_zones is defined
 
 - name: pdns_zones | creating pdns zones
   command: "curl -X POST --data @{{ pdns_zones_dir }}/{{ item }}/{{ item }}_zone -v -H 'X-API-Key: {{ pdns_api_key }}' http://{{ pdns_webserver }}:{{ pdns_webserver_port }}/servers/localhost/zones/{{ item }}"
   with_items:
-    - pdns_fwd_zones
-    - pdns_rev_zones
+    - "{{ pdns_fwd_zones }}"
+    - "{{ pdns_rev_zones }}"
   when: pdns_zones_created.changed and (pdns_fwd_zones is defined or pdns_rev_zones is defined)
