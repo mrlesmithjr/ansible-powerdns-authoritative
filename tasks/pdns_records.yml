@@ -11,14 +11,14 @@
   with_items: pdns_records
 
 - name: creating pdns records in zones folders
-  template: src=update_pdns_records.j2 dest={{ pdns_zones_dir }}/{{ item.zone }}/{{ item.name }}_{{ item.type }}
+  template: src=pdns_records.j2 dest={{ pdns_zones_dir }}/{{ item.zone }}/{{ item.name }}_{{ item.type }}
   delegate_to: localhost
   sudo: false
   with_items: pdns_records
   when: item.type != "SRV"
 
 - name: creating pdns SRV records in zones folders
-  template: src=update_pdns_records.j2 dest={{ pdns_zones_dir }}/{{ item.zone }}/{{ item.dc_name }}{{ item.name }}_{{ item.type }}
+  template: src=pdns_records.j2 dest={{ pdns_zones_dir }}/{{ item.zone }}/{{ item.dc_name }}{{ item.name }}_{{ item.type }}
   delegate_to: localhost
   sudo: false
   with_items: pdns_records
