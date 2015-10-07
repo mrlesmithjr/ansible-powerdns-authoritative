@@ -1,0 +1,30 @@
+---
+- name: ensuring pdns zone folder exists
+  file: path={{ pdns_zones_dir }} state=directory
+  delegate_to: localhost
+  sudo: false
+
+- name: creating pdns zones folders
+  file: path={{ pdns_zones_dir }}/{{ item }} state=directory
+  delegate_to: localhost
+  sudo: false
+  with_items:
+    - pdns_fwd_zones
+    - pdns_rev_zones
+  when: pdns_fwd_zones is defined or pdns_rev_zones is defined
+
+- name: creating pdns forward/reverse zones in zone folders
+  template: src=pdns_zones.j2 dest={{ pdns_zones_dir }}/{{ item }}/{{ item }}_zone
+  delegate_to: localhost
+  sudo: false
+  with_items:
+    - pdns_fwd_zones
+    - pdns_rev_zones
+  when: pdns_fwd_zones is defined or pdns_rev_zones is defined
+
+- name: pdns_zones | creating pdns zones
+  command: "curl -X POST --data @{{ pdns_zones_dir }}/{{ item }}/{{ item }}_zone -v -H 'X-API-Key: {{ pdns_api_key }}' http://{{ pdns_webserver }}:{{ pdns_webserver_port }}/servers/localhost/zones/{{ item }}"
+  with_items:
+    - pdns_fwd_zones
+    - pdns_rev_zones
+  when: item.changed and (pdns_fwd_zones is defined or pdns_rev_zones is defined)
