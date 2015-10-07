@@ -29,11 +29,11 @@
   delegate_to: localhost
   sudo: false
   with_items: pdns_records
-  when: item.type != "SRV" and item.changed
+  when: item.type != "SRV" and item.changed == "True"
 
 - name: adding SRV pdns records
   command: "curl -X PATCH -H 'X-API-KEY: {{ pdns_api_key }}' --data @{{ pdns_zones_dir }}/{{ item.zone }}/{{ item.dc_name }}{{ item.name }}_{{ item.type }} http://{{ pdns_webserver }}:{{ pdns_webserver_port }}/servers/localhost/zones/{{ item.zone }}"
   delegate_to: localhost
   sudo: false
   with_items: pdns_records
-  when: item.type == "SRV" and item.changed
+  when: item.type == "SRV" and item.changed == "True"

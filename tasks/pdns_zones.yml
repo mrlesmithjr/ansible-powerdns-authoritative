@@ -27,4 +27,4 @@
   with_items:
     - pdns_fwd_zones
     - pdns_rev_zones
-  when: item.changed and (pdns_fwd_zones is defined or pdns_rev_zones is defined)
+  when: item.changed == "True" and (pdns_fwd_zones is defined or pdns_rev_zones is defined)
