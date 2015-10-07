@@ -34,16 +34,6 @@
     - "{{ pdns_rev_zones }}"
   when: pdns_fwd_zones is defined or pdns_rev_zones is defined
 
-#- name: pdns_zones | creating pdns zones
-#  command: "curl -X POST -H 'X-API-KEY: {{ pdns_api_key }}' --data @{{ pdns_zones_dir }}/{{ item }}/{{ item }}_zone http://{{ pdns_webserver }}:{{ pdns_webserver_port }}/servers/localhost/zones"
-#  delegate_to: localhost
-#  run_once: true
-#  sudo: false
-#  with_items:
-#    - "{{ pdns_fwd_zones }}"
-#    - "{{ pdns_rev_zones }}"
-#  when: pdns_zones_created.changed and (pdns_fwd_zones is defined or pdns_rev_zones is defined)
-
 - name: pdns_zones | creating pdns zones script
   template: src=pdns_zones.sh.j2 dest=/tmp/pdns_zones.sh owner=root group=root mode=0770
   when: pdns_zones_created.changed and (pdns_fwd_zones is defined or pdns_rev_zones is defined)
@@ -52,3 +42,6 @@
   shell: /tmp/pdns_zones.sh
   run_once: true
   when: pdns_zones_created.changed
+
+- name: pdns_zones | cleaning up pdns zones script
+  file: path=/tmp/pdns_zones.sh state=absent
