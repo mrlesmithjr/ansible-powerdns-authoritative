@@ -66,6 +66,7 @@ pdns_webserver_address: 0.0.0.0
 pdns_webserver_allow: '0.0.0.0/0,::/0'
 pdns_webserver_password: []  #define here or globally in group_vars/all/accounts
 pdns_webserver_port: 8081
+pdns_zones_dir: pdns_zones  #defines the folder to create locally that will contain the records and zones to be created by pdns_records.yml and pdns_zones.yml
 poweradmin_db_host: localhost  #define here or globally in group_vars/group
 poweradmin_pass: admin  #define here or globally in group_vars/group
 poweradmin_user: admin  #define here or globally in group_vars/group
