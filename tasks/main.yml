@@ -19,7 +19,7 @@
 - include: pdns_zones.yml
   tags:
     - create_pdns_zones
-  when: pdns_create_zones is defined and pdns_create_zones
+  when: create_pdns_zones is defined and create_pdns_zones
 
 - include: pdns_records.yml
   tags:
