@@ -1,5 +1,6 @@
 {
-  "name": "{{ item }}",
-  "kind": "{{ pdns_zone_types }}",
-  "masters": []
+  "name":"{{ item }}",
+  "kind":"{{ pdns_zone_types }}",
+  "masters": [],
+  "nameservers": ["{{ pdns_pri_dns }}", "{{ pdns_sec_dns }}"]
 }
