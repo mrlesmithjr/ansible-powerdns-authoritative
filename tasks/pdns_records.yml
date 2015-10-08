@@ -63,5 +63,5 @@
   run_once: true
   when: (pdns_records_created.changed or pdns_srv_records_created.changed)
 
-#- name: pdns_zones | cleaning up pdns records script
-#  file: path=/tmp/pdns_records.sh state=absent
+- name: pdns_records | cleaning up pdns records script
+  file: path=/tmp/pdns_records.sh state=absent
