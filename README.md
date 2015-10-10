@@ -39,6 +39,7 @@ pdns_db_pass: powerdns  #define here or globally in group_vars/all/accounts
 pdns_db_user: powerdns  #define here or globally in group_vars/all/accounts
 pdns_default_soa_mail: 'hostmaster.{{ pri_domain_name }}' #define here or globally in group_vars/group
 pdns_default_soa_name: '{{ ansible_hostname }}.{{ pri_domain_name }}' #define here or globally in group_vars/group
+pdns_download_url: https://downloads.powerdns.com/releases/deb
 pdns_json_interface: true
 pdns_ns1: "ns1.{{ pri_domain_name }}"  #define primary nameserver to use when creating zones...IP/Hostname..ns1.example.org
 pdns_ns2: "ns2.{{ pri_domain_name }}"  #define secondary nameserver to use when creating zones...IP/Hostname..ns2.example.org
@@ -103,6 +104,7 @@ pdns_webserver_address: 0.0.0.0
 pdns_webserver_allow: '0.0.0.0/0,::/0'
 pdns_webserver_password: []  #define here or globally in group_vars/all/accounts
 pdns_webserver_port: 8081
+pdns_zone_types: Native  #defines zone types to create using API..Native,Master,Slave...Native should be used by default...
 pdns_zones_dir: pdns_zones  #defines the folder to create locally that will contain the records and zones to be created by pdns_records.yml and pdns_zones.yml
 poweradmin_db_host: localhost  #define here or globally in group_vars/group
 poweradmin_pass: admin  #define here or globally in group_vars/group
@@ -112,7 +114,6 @@ pri_dns: []  #defines primary dns server on network...define here or globally in
 pri_domain_name: example.org  #define here or globally in group_vars/all
 sec_dns: []  #defines secondary dns server on network...define here or globally in group_vars/all
 web_root: /var/www/html
-pdns_zone_types: Native
 ````
 
 Dependencies

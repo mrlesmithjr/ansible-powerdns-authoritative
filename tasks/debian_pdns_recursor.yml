@@ -6,7 +6,7 @@
   user: name=pdns group=pdns system=yes home=/var/spool/powerdns shell=/bin/false state=present
 
 - name: debian_pdns_recursor | downloading powerdns recursor
-  get_url: url='https://downloads.powerdns.com/releases/deb/pdns-recursor_{{ pdns_recursor_version }}_amd64.deb' dest='/tmp/pdns-recursor_{{ pdns_recursor_version }}_amd64.deb'
+  get_url: url='{{ pdns_download_url }}/pdns-recursor_{{ pdns_recursor_version }}_amd64.deb' dest='/tmp/pdns-recursor_{{ pdns_recursor_version }}_amd64.deb'
 
 - name: debian_pdns_recursor | installing powerdns recursor
   apt: deb=/tmp/pdns-recursor_{{ pdns_recursor_version }}_amd64.deb

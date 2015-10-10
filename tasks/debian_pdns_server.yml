@@ -6,7 +6,7 @@
   user: name=pdns group=pdns system=yes home=/var/spool/powerdns shell=/bin/false state=present
 
 - name: debian_pdns | downloading powerdns
-  get_url: url='https://downloads.powerdns.com/releases/deb/pdns-static_{{ pdns_server_version }}_amd64.deb' dest='/tmp/pdns-static_{{ pdns_server_version }}_amd64.deb'
+  get_url: url='{{ pdns_download_url }}/pdns-static_{{ pdns_server_version }}_amd64.deb' dest='/tmp/pdns-static_{{ pdns_server_version }}_amd64.deb'
 
 - name: debian_pdns | installing powerdns
   apt: deb=/tmp/pdns-static_{{ pdns_server_version }}_amd64.deb
