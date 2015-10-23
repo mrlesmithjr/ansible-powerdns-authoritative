@@ -13,6 +13,7 @@
   notify: restart_pdns
 
 - name: debian_pdns | configuring powerdns
+  template: src=etc/powerdns/pdns.conf.j2 dest=/etc/powerdns/pdns.conf owner=root group=root
   register: pdns_configured
 
 - name: debian_pdns | restarting powerdns
