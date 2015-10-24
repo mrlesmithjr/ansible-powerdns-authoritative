@@ -11,10 +11,10 @@
     - remove_logstash
   when: (install_logstash is defined and not install_logstash) or install_logstash is not defined
 
-- include: cron.yml
-  tags:
-    - cron
-  when: enable_pdns_anycast is defined and enable_pdns_anycast
+#- include: cron.yml
+#  tags:
+#    - cron
+#  when: enable_pdns_anycast is defined and enable_pdns_anycast
 
 - include: pdns_zones.yml
   tags:
