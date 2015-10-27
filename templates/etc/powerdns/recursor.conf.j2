@@ -93,7 +93,7 @@ allow-from=127.0.0.0/8
 # forward-zones=
 {% if enable_pdns_recursor_fwd_zones is defined and enable_pdns_recursor_fwd_zones %}
 {%   if pdns_recursor_fwd_zones is defined %}
-forward-zones={% for item in pdns_recursor_fwd_zones %}{{ item.name }}{% if not loop.last %},{% endif %}={% for server in item.servers %}{{ server }}{% if not loop.last %};{% endif %}{% endfor %}{% endfor %}
+forward-zones={% for item in pdns_recursor_fwd_zones %}{{ item.name }}={% for server in item.servers %}{{ server }}{% if not loop.last %};{% endif %}{% endfor %}{% if not loop.last %}, {% endif %}{% endfor %}
 
 {%   endif %}
 {% endif %}
