@@ -4,14 +4,17 @@
     - install_powerdns
     - powerdns
     - upgrade_powerdns
-  when: install_pdns_server
+  when: install_pdns_server is defined and install_pdns_server
 
 - include: debian_pdns_recursor.yml
   tags:
     - install_powerdns
     - powerdns
     - upgrade_powerdns
-  when: install_pdns_recursor
+  when: install_pdns_recursor is defined and install_pdns_recursor
 
 - name: debian | ensuring pdns server is running
-  service: name=pdns state=started
+  service:
+    name: pdns
+    state: started
+  when: install_pdns_server is defined and install_pdns_server
