@@ -30,6 +30,7 @@ install_logstash: false  #defines if logstash should be installed and configured
 install_pdns_recursor: true   #defines if recursive caching server is to be installed
 install_pdns_server: true  #defines if authoriative dns server is to be installed
 install_poweradmin: false  #use NSEDIT instead
+nsedit_apiip: 127.0.0.1  #defines the IP address of the NSEDIT API IP to connect to...should be localhost in most cases.
 pdns_api_key: changeme  #define here or globally in group_vars/all/accounts
 pdns_api_url: "http://127.0.0.1:{{ pdns_webserver_port }}/servers/localhost/zones"
 pdns_curl_header: "-H 'X-API-Key: {{ pdns_api_key }}'"

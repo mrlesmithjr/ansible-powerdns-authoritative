@@ -2,7 +2,7 @@
 
 $apiuser = '';           # The PowerDNS API username. Leave empty for authmethod='xapikey' (see AUTHENTICATION)
 $apipass = '{{ pdns_api_key }}';           # The PowerDNS API-user password or the PowerDNS-API key (see AUTHENTICATION)
-$apiip   = '';           # The IP of the PowerDNS API
+$apiip   = '{{ nsedit_apiip }}';           # The IP of the PowerDNS API
 $apiport = '{{ pdns_webserver_port }}';       # The port of the PowerDNS API
 $apivers = 0;            # The version of the PowerDNS API. 0 == experimental, 1 = v1 (pdns 4.0)
 $apisid  = 'localhost';  # PowerDNS's :server_id
