@@ -130,6 +130,9 @@
     - php5-sqlite
     - php5-xmlrpc
     - wget
+  when: >
+        install_poweradmin is defined and
+        install_poweradmin
 
 - name: debian_pdns | installing pear modules
   command: pear install {{ item }}
@@ -148,7 +151,9 @@
   get_url:
     url: "http://sourceforge.net/projects/poweradmin/files/{{ poweradmin_ver }}.tgz"
     dest: /tmp/poweradmin.tgz
-  when: install_poweradmin is defined and install_poweradmin
+  when: >
+        install_poweradmin is defined and
+        install_poweradmin
 
 - name: debian_pdns | extracting poweradmin package to web_root
   unarchive:
@@ -158,17 +163,23 @@
     owner: www-data
     group: www-data
     creates: "{{ web_root }}/poweradmin/index.php"
-  when: install_poweradmin is defined and install_poweradmin
+  when: >
+        install_poweradmin is defined and
+        install_poweradmin
 
 - name: debian_pdns | checking for existing poweradmin
   stat:
     path: "{{ web_root }}/poweradmin"
   register: poweradmin_moved
-  when: install_poweradmin is defined and install_poweradmin
+  when: >
+        install_poweradmin is defined and
+        install_poweradmin
 
 - name: debian_pdns | moving poweradmin
   command: "mv {{ web_root }}/{{ poweradmin_ver }} {{ web_root }}/poweradmin"
-  when: install_poweradmin and poweradmin_moved.stat.exists == false
+  when: >
+        install_poweradmin and
+        poweradmin_moved.stat.exists == false
 
 - name: debian_pdns | creating poweradmin user
   mysql_user:
@@ -176,7 +187,9 @@
     password: "{{ poweradmin_pass }}"
     priv: "{{ pdns_db_name }}.*:ALL"
     state: present
-  when: install_poweradmin is defined and install_poweradmin
+  when: >
+        install_poweradmin is defined and
+        install_poweradmin
 
 - name: debian_pdns | configuring poweradmin
   template:
@@ -184,13 +197,17 @@
     dest: "{{ web_root }}/poweradmin/inc/config.inc.php"
     owner: www-data
     group: www-data
-  when: install_poweradmin is defined and install_poweradmin
+  when: >
+        install_poweradmin is defined and
+        install_poweradmin
 
 - name: debian_pdns | removing poweradmin install directory
   file:
     path: "{{ web_root }}/poweradmin/install"
     state: absent
-  when: install_poweradmin is defined and install_poweradmin
+  when: >
+        install_poweradmin is defined and
+        install_poweradmin
 
 - name: debian_pdns | installing nsedit
   git:
