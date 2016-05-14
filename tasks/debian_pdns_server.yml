@@ -140,12 +140,18 @@
   with_items:
     - 'DB'
     - 'pear/MDB2#mysql'
+  when: >
+        install_poweradmin is defined and
+        install_poweradmin
 
 - name: debian_pdns | enabling php mcrypt module
   command: php5enmod mcrypt
   args:
     creates: /etc/php5/cli/conf.d/20-mcrypt.ini
   notify: restart_apache2
+  when: >
+        install_poweradmin is defined and
+        install_poweradmin
 
 - name: debian_pdns | downloading poweradmin
   get_url:
