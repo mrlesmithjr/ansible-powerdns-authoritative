@@ -3,20 +3,20 @@
 - name: restart pdns
   service:
     name: "pdns"
-    state: restarted
+    state: "restarted"
     sleep: 10
 
 - name: restart pdns recursor
   service:
     name: "pdns-recursor"
-    state: restarted
+    state: "restarted"
 
 - name: restart apache2
   service:
     name: "apache2"
-    state: restarted
+    state: "restarted"
 
 - name: restart mysql
   service:
     name: "mysql"
-    state: restarted
+    state: "restarted"
