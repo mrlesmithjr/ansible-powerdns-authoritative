@@ -9,7 +9,10 @@
 - include: remove_logstash.yml
   tags:
     - remove_logstash
-  when: (install_logstash is defined and not install_logstash) or install_logstash is not defined
+  when: >
+        (install_logstash is defined and
+        not install_logstash) or
+        install_logstash is not defined
 
 #- include: cron.yml
 #  tags:
@@ -19,9 +22,14 @@
 - include: pdns_zones.yml
   tags:
     - create_pdns_zones
-  when: create_pdns_zones is defined and create_pdns_zones
+  when: >
+        create_pdns_zones is defined and
+        create_pdns_zones
 
 - include: pdns_records.yml
   tags:
     - create_pdns_records
-  when: (create_pdns_records is defined and create_pdns_records) and pdns_records is defined
+  when: >
+        (create_pdns_records is defined and
+        create_pdns_records) and
+        pdns_records is defined

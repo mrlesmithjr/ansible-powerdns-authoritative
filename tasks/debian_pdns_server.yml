@@ -93,7 +93,9 @@
     name: "{{ pdns_db_name }}"
     state: import
     target: /tmp/db_schema
-  when: not pdns_db_cluster and db_schema_imported.stat.exists != True
+  when: >
+        not pdns_db_cluster and
+        not db_schema_imported.stat.exists
 
 - name: debian_pdns | importing db schema
   mysql_db:
@@ -101,13 +103,15 @@
     state: import
     target: /tmp/db_schema
   run_once: true
-  when: pdns_db_cluster and db_schema_imported.stat.exists != True
+  when: >
+        pdns_db_cluster and
+        not db_schema_imported.stat.exists
 
 - name: debian_pdns | marking db schema as imported
   file:
     path: /var/log/db_schema_imported
     state: touch
-  when: db_schema_imported.stat.exists != True
+  when: not db_schema_imported.stat.exists
 
 - name: debian_pdns | installing poweradmin pre-reqs
   apt:
@@ -185,7 +189,7 @@
   command: "mv {{ web_root }}/{{ poweradmin_ver }} {{ web_root }}/poweradmin"
   when: >
         install_poweradmin and
-        poweradmin_moved.stat.exists == false
+        not poweradmin_moved.stat.exists
 
 - name: debian_pdns | creating poweradmin user
   mysql_user:

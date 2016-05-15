@@ -70,7 +70,9 @@
     owner: root
     group: root
     mode: 0770
-  when: (pdns_records_created.changed or pdns_srv_records_created.changed)
+  when: >
+        pdns_records_created.changed or
+        pdns_srv_records_created.changed
 
 - name: pdns_records | creating pdns records script
   template:
@@ -79,17 +81,23 @@
     owner: root
     group: root
     mode: 0770
-  when: force is defined and force
+  when: >
+        force is defined and
+        force
 
 - name: pdns_records | creating pdns records
   shell: /tmp/pdns_records.sh
   run_once: true
-  when: (pdns_records_created.changed or pdns_srv_records_created.changed)
+  when: >
+        pdns_records_created.changed or
+        pdns_srv_records_created.changed
 
 - name: pdns_records | creating pdns records
   shell: /tmp/pdns_records.sh
   run_once: true
-  when: force is defined and force
+  when: >
+        force is defined and
+        force
 
 - name: pdns_records | cleaning up pdns records script
   file:
