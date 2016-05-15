@@ -1,14 +1,14 @@
 ---
 - name: nsedit | installing nsedit
   git:
-    repo: https://github.com/tuxis-ie/nsedit
-    recursive: yes
+    repo: "https://github.com/tuxis-ie/nsedit"
+    recursive: "yes"
     dest: "{{ web_root }}/nsedit"
 
 - name: nsedit | changing ownership of nsedit
   file:
     path: "{{ item }}"
-    state: directory
+    state: "directory"
     owner: "{{ web_owner }}"
     group: "{{ web_group }}"
   with_items:
@@ -17,7 +17,7 @@
 
 - name: nsedit | configuring nsedit
   template:
-    src: nsedit.config.inc.php.j2
+    src: "nsedit.config.inc.php.j2"
     dest: "{{ web_root }}/nsedit/includes/config.inc.php"
     owner: "{{ web_owner }}"
     group: "{{ web_group }}"

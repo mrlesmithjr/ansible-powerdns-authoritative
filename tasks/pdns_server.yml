@@ -11,7 +11,7 @@
     dest: "/etc/powerdns/pdns.conf"
     owner: "root"
     group: "root"
-  register: pdns_configured
+  register: "pdns_configured"
 
 - name: pdns_server | ensuring pdns service is enabled
   service:
@@ -21,20 +21,20 @@
 - name: pdns_server | restarting powerdns
   service:
     name: "pdns"
-    state: restarted
+    state: "restarted"
     sleep: 10
   when: pdns_configured.changed
 
 - name: pdns_server | creating powerdns db
   mysql_db:
     name: "{{ pdns_db_name }}"
-    state: present
+    state: "present"
   when: not pdns_db_cluster
 
 - name: pdns_server | creating powerdns db
   mysql_db:
     name: "{{ pdns_db_name }}"
-    state: present
+    state: "present"
   run_once: true
   when: pdns_db_cluster
 
@@ -63,12 +63,12 @@
 - name: pdns_server | checking for existing db schema import
   stat:
     path: "/var/log/db_schema_imported"
-  register: db_schema_imported
+  register: "db_schema_imported"
 
 - name: pdns_server | importing db schema
   mysql_db:
     name: "{{ pdns_db_name }}"
-    state: import
+    state: "import"
     target: "/tmp/db_schema"
   when: >
         not pdns_db_cluster and
@@ -77,7 +77,7 @@
 - name: pdns_server | importing db schema
   mysql_db:
     name: "{{ pdns_db_name }}"
-    state: import
+    state: "import"
     target: "/tmp/db_schema"
   run_once: true
   when: >
@@ -87,10 +87,10 @@
 - name: pdns_server | marking db schema as imported
   file:
     path: "/var/log/db_schema_imported"
-    state: touch
+    state: "touch"
   when: not db_schema_imported.stat.exists
 
 - name: pdns_server | ensuring pdns server is running and enabled on boot
   service:
     name: "pdns"
-    state: started
+    state: "started"
