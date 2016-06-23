@@ -28,6 +28,7 @@ pdns_default_soa_name: "{{ ansible_hostname }}.{{ pri_domain_name }}" #define he
 pdns_download_url: https://downloads.powerdns.com/releases
 pdns_json_interface: true
 pdns_listen_all_interfaces: true  #defines if PDSN will listen on all interfaces
+pdns_master: false  #Defines if node should perform as PDNS Master
 pdns_ns1: "ns1.{{ pri_domain_name }}"  #define primary nameserver to use when creating zones...IP/Hostname..ns1.example.org
 pdns_ns2: "ns2.{{ pri_domain_name }}"  #define secondary nameserver to use when creating zones...IP/Hostname..ns2.example.org
 pdns_fwd_zones:  #defines the DNS forward zones to create if create_pdns_zones is true
@@ -96,6 +97,10 @@ pdns_rev_zones:  #defines the DNS reverse zones to create if create_pdns_zones i
   - 70.168.192.in-addr.arpa
   - 200.168.192.in-addr.arpa
 pdns_server_version: 3.4.6-1
+pdns_slave: false  #Defines if node should perform as PDNS Slave
+pdns_slaves:
+  - '172.28.128.4/32'
+  - '172.28.128.6/32'
 pdns_webserver_address: 0.0.0.0
 pdns_webserver_allow: "0.0.0.0/0,::/0"
 pdns_webserver_password: []  #define here or globally in group_vars/all/accounts
