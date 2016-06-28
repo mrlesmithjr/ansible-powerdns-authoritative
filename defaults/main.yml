@@ -2,6 +2,7 @@
 allow_ddns_updates: false  #define here or globally in group_vars/group
 allow_ddns_updates_from: 0.0.0.0/0  #defines subnet to allow DDNS updates from if allowed...define here or globally in group_vars/group
 config_logstash: false  #defines if logstash should be configured if installed...define here or globally in group_vars/group
+config_soa_edit_api: false  #set to true if setting up Master/Slave...Otherwise Master zones will not update their SOA in order to transfer
 create_pdns_records: false   #defines if dns records should be created/updated
 create_pdns_zones: false  #defines if dns zones should be created...pdns_fwd_zones and pdns_fwd_zones
 dns_hostmaster: "hostmaster.{{ pri_domain_name }}"  #define here or globally in group_vars/group
@@ -117,4 +118,5 @@ poweradmin_ver: poweradmin-2.1.7
 pri_dns: []  #defines primary dns server on network...define here or globally in group_vars/all
 pri_domain_name: example.org  #define here or globally in group_vars/all
 sec_dns: []  #defines secondary dns server on network...define here or globally in group_vars/all
+soa_edit_api: 'INCEPTION-INCREMENT'
 web_root: /var/www/html
