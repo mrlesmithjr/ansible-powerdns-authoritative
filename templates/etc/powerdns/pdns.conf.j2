@@ -29,7 +29,9 @@ allow-dnsupdate-from={{ allow_ddns_updates_from }}
 # also-notify	When notifying a domain, also notify these nameservers
 #
 # also-notify=
-
+{% if pdns_also_notify.configure %}
+also-notify={{ pdns_also_notify.notify_ips|join (', ') }}
+{% endif %}
 #################################
 # any-to-tcp	Answer ANY queries with tc=1, shunting to TCP
 #
