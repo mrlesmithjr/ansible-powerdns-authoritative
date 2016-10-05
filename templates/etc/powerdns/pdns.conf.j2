@@ -269,6 +269,7 @@ local-address=127.0.0.1,{{ ansible_default_ipv4.address }}
 # local-port	The port on which we listen
 #
 # local-port=53
+local-port={{ pdns_auth_port }}
 
 #################################
 # log-dns-details	If PDNS should log DNS non-erroneous details

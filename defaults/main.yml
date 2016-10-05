@@ -23,6 +23,7 @@ pdns_also_notify:  #Defines if additional nameservers should be notified of zone
     - '192.168.200.202'
 pdns_api_key: changeme  #define here or globally in group_vars/all/accounts
 pdns_api_url: "http://127.0.0.1:{{ pdns_webserver_port }}/servers/localhost/zones"
+pdns_auth_port: '53'
 pdns_curl_header: "-H 'X-API-Key: {{ pdns_api_key }}'"
 pdns_db_cluster: false  #defines if backend db for pdns is clustered...define here or in group_vars/group
 pdns_db_host: localhost
