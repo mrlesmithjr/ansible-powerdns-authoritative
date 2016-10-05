@@ -47,22 +47,6 @@
   with_items: '{{ pdns_records }}'
   when: item.type == "SRV"
 
-#- name: pdns_records | adding pdns records
-#  command: "curl -X PATCH -H 'X-API-KEY: {{ pdns_api_key }}' --data @{{ pdns_zones_dir }}/{{ item.zone }}/{{ item.name }}_{{ item.type }} http://{{ pdns_webserver }}:{{ pdns_webserver_port }}/servers/localhost/zones/{{ item.zone }}"
-#  delegate_to: localhost
-#  run_once: true
-#  sudo: false
-#  with_items: pdns_records
-#  when: item.type != "SRV" and pdns_records_created.changed
-
-#- name: pdns_records | adding SRV pdns records
-#  command: "curl -X PATCH -H 'X-API-KEY: {{ pdns_api_key }}' --data @{{ pdns_zones_dir }}/{{ item.zone }}/{{ item.dc_name }}{{ item.name }}_{{ item.type }} http://{{ pdns_webserver }}:{{ pdns_webserver_port }}/servers/localhost/zones/{{ item.zone }}"
-#  delegate_to: localhost
-#  run_once: true
-#  sudo: false
-#  with_items: pdns_records
-#  when: item.type == "SRV" and pdns_srv_records_created.changed
-
 - name: pdns_records | creating pdns records script
   template:
     src: pdns_records.sh.j2

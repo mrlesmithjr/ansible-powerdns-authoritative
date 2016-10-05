@@ -5,9 +5,9 @@
     state: "present"
     force: "yes"
   with_items:
-    - git
-    - jq
-    - python-mysqldb
+    - 'git'
+    - 'jq'
+    - 'python-mysqldb'
 
 - name: debian_pdns_server | downloading powerdns
   get_url:
