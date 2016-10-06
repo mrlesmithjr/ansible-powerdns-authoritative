@@ -88,7 +88,7 @@ pdns_rev_zones:  #defines the DNS reverse zones to create if create_pdns_zones i
   - '1.168.192.in-addr.arpa'
   - '70.168.192.in-addr.arpa'
   - '200.168.192.in-addr.arpa'
-pdns_server_version: '3.4.8-1'
+pdns_server_version: '3.4.9-1'
 pdns_slave: false  #Defines if node should perform as PDNS Slave
 pdns_slaves:
   - '172.28.128.4/32'
