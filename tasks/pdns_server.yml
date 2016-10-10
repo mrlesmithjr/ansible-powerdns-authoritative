@@ -12,6 +12,22 @@
     owner: "root"
     group: "root"
   register: "pdns_configured"
+  when: >
+        ansible_os_family == "Debian" or
+        (ansible_os_family == "RedHat" and
+        pdns_server_version != "4.x")
+
+- name: pdns_server | Configuring PowerDNS
+  template:
+    src: "etc/powerdns/pdns.conf.j2"
+    dest: "/etc/pdns/pdns.conf"
+    owner: "root"
+    group: "root"
+  notify: restart pdns
+  register: "pdns_configured"
+  when: >
+        (ansible_os_family == "RedHat" and
+        pdns_server_version == "4.x")
 
 - name: pdns_server | ensuring pdns service is enabled
   service:
