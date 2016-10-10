@@ -8,14 +8,16 @@ Requirements
 ------------
 
 Install required Ansible roles..  
-````
+```
 sudo ansible-galaxy install -r requirements.yml
-````
+```
 
 Role Variables
 --------------
+If you would like to install PDNS 4.x version change `pdns_server_version` to
+`4.x`.
 
-````
+```
 ---
 # defaults file for ansible-powerdns-authoritative
 allow_ddns_updates: false  #define here or globally in group_vars/group
@@ -25,6 +27,7 @@ create_pdns_records: false   #defines if dns records should be created/updated
 create_pdns_zones: false  #defines if dns zones should be created...pdns_fwd_zones and pdns_fwd_zones
 dns_hostmaster: 'hostmaster.{{ pri_domain_name }}'  #define here or globally in group_vars/group
 enable_pdns_anycast: false  #define here or globally in group_vars/group
+pdns_enable_api: true  # Defines if API should be enabled
 enable_pdns_recursive_lookups: false  #define here or globally in group_vars/group
 enable_pdns_server_logging: false  #define here or globally in group_vars/group
 enable_pdns_web_server: false  #define here or globally in group_vars/group
@@ -106,7 +109,7 @@ pdns_rev_zones:  #defines the DNS reverse zones to create if create_pdns_zones i
   - '1.168.192.in-addr.arpa'
   - '70.168.192.in-addr.arpa'
   - '200.168.192.in-addr.arpa'
-pdns_server_version: '3.4.10-1'
+pdns_server_version: '3.4.10-1' # Defines version to install...To install 4.x change to 4.x
 pdns_slave: false  #Defines if node should perform as PDNS Slave
 pdns_slaves:
   - '172.28.128.4/32'
@@ -121,7 +124,7 @@ pri_dns: []  #defines primary dns server on network...define here or globally in
 pri_domain_name: 'example.org'  #define here or globally in group_vars/all
 sec_dns: []  #defines secondary dns server on network...define here or globally in group_vars/all
 soa_edit_api: 'INCEPTION-INCREMENT'
-````
+```
 
 Dependencies
 ------------
@@ -131,12 +134,12 @@ Reference requirements section above...
 Example Playbook
 ----------------
 
-````
+```
 - hosts: all
   roles:
     - role: ansible-mysql
     - role: ansible-powerdns-authoritative
-````
+```
 
 License
 -------
