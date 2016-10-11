@@ -11,7 +11,7 @@
     dest: "/etc/powerdns/pdns.conf"
     owner: "root"
     group: "root"
-  register: "pdns_configured"
+  register: "pdns_configured_1"
   when: >
         ansible_os_family == "Debian" or
         (ansible_os_family == "RedHat" and
@@ -24,7 +24,7 @@
     owner: "root"
     group: "root"
   notify: restart pdns
-  register: "pdns_configured"
+  register: "pdns_configured_2"
   when: >
         (ansible_os_family == "RedHat" and
         pdns_server_version == "4.x")
@@ -39,7 +39,9 @@
     name: "pdns"
     state: "restarted"
     sleep: 10
-  when: pdns_configured.changed
+  when: >
+        pdns_configured_1.changed or
+        pdns_configured_2.changed
 
 - name: pdns_server | creating powerdns db
   mysql_db:
