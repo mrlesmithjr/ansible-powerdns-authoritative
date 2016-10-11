@@ -61,7 +61,9 @@
     name: "{{ pdns_db_user }}"
     password: "{{ pdns_db_pass }}"
     priv: "{{ pdns_db_name }}.*:ALL"
+    host: "{{ item }}"
     state: present
+  with_items: '{{ pdns_db_allow_access_from_hosts }}'
   when: not pdns_db_cluster
 
 - name: pdns_server | creating powerdns user
@@ -69,8 +71,10 @@
     name: "{{ pdns_db_user }}"
     password: "{{ pdns_db_pass }}"
     priv: "{{ pdns_db_name }}.*:ALL"
+    host: "{{ item }}"
     state: present
   run_once: true
+  with_items: '{{ pdns_db_allow_access_from_hosts }}'
   when: pdns_db_cluster
 
 - name: pdns_server | copying db schema file

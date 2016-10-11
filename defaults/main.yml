@@ -21,6 +21,12 @@ pdns_api_key: 'changeme'  #define here or globally in group_vars/all/accounts
 pdns_api_url: 'http://127.0.0.1:{{ pdns_webserver_port }}/servers/localhost/zones'
 pdns_auth_port: '53'
 pdns_curl_header: "-H 'X-API-Key: {{ pdns_api_key }}'"
+pdns_db_allow_access_from_hosts:  #defines hosts where {{ pdns_db_user }} can login from
+  - '{{ ansible_hostname }}'
+  - '127.0.0.1'
+  - '::1'
+  - 'localhost'
+  - '%' # Allows from everywhere
 pdns_db_cluster: false  #defines if backend db for pdns is clustered...define here or in group_vars/group
 pdns_db_host: 'localhost'
 pdns_db_name: 'powerdns'  #define here or globally in group_vars/group
