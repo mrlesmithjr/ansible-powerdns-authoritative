@@ -7,7 +7,7 @@ create_pdns_records: false   #defines if dns records should be created/updated
 create_pdns_zones: false  #defines if dns zones should be created...pdns_fwd_zones and pdns_fwd_zones
 dns_hostmaster: 'hostmaster.{{ pri_domain_name }}'  #define here or globally in group_vars/group
 enable_pdns_anycast: false  #define here or globally in group_vars/group
-pdns_enable_api: true  # Defines if API should be enabled
+enable_pdns_api: true  # Defines if API should be enabled
 enable_pdns_recursive_lookups: false  #define here or globally in group_vars/group
 enable_pdns_server_logging: false  #define here or globally in group_vars/group
 enable_pdns_web_server: false  #define here or globally in group_vars/group

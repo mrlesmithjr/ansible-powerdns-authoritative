@@ -7,7 +7,7 @@ allow-dnsupdate-from={{ allow_ddns_updates_from }}
 {% if pdns_also_notify.configure %}
 also-notify={{ pdns_also_notify.notify_ips|join (', ') }}
 {% endif %}
-{% if pdns_enable_api and pdns_server_version == "4.x" %}
+{% if enable_pdns_api and pdns_server_version == "4.x" %}
 api=yes
 {% endif %}
 {% if pdns_default_soa_mail is defined %}
@@ -89,7 +89,7 @@ webserver-address={{ pdns_webserver_address }}
 webserver-allow-from={{ pdns_webserver_allow }}
 {% endif %}
 {% if enable_pdns_web_server and pdns_webserver_password is defined %}
-webserver-password={{pdns_webserver_password}}
+webserver-password={{ pdns_webserver_password }}
 {% endif %}
 {% if enable_pdns_web_server and pdns_webserver_port is defined %}
 webserver-port={{ pdns_webserver_port }}

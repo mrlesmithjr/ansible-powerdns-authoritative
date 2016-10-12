@@ -9,7 +9,7 @@
     - 'git'
     - 'jq'
     - 'python-mysqldb'
-    - 'mysql-client'
+    # - 'mysql-client' # Causing MariaDB to be uninstalled
 
 - name: debian_pdns_server | downloading powerdns
   get_url:
