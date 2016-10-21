@@ -10,6 +10,11 @@ also-notify={{ pdns_also_notify.notify_ips|join (', ') }}
 {% if enable_pdns_api and pdns_server_version == "4.x" %}
 api=yes
 {% endif %}
+{% if enable_pdns_carbon_metrics %}
+carbon-interval={{ pdns_carbon_info.interval }}
+carbon-ourname={{ pdns_carbon_info.ourname }}
+carbon-server={{ pdns_carbon_info.server }}
+{% endif %}
 {% if pdns_default_soa_mail is defined %}
 default-soa-mail={{ pdns_default_soa_mail }}
 {% endif %}

@@ -28,6 +28,7 @@ create_pdns_zones: false  #defines if dns zones should be created...pdns_fwd_zon
 dns_hostmaster: 'hostmaster.{{ pri_domain_name }}'  #define here or globally in group_vars/group
 enable_pdns_anycast: false  #define here or globally in group_vars/group
 enable_pdns_api: true  # Defines if API should be enabled
+enable_pdns_carbon_metrics: false
 enable_pdns_recursive_lookups: false  #define here or globally in group_vars/group
 enable_pdns_server_logging: false  #define here or globally in group_vars/group
 enable_pdns_web_server: false  #define here or globally in group_vars/group
@@ -40,6 +41,10 @@ pdns_also_notify:  #Defines if additional nameservers should be notified of zone
 pdns_api_key: 'changeme'  #define here or globally in group_vars/all/accounts
 pdns_api_url: 'http://127.0.0.1:{{ pdns_webserver_port }}/servers/localhost/zones'
 pdns_auth_port: '53'
+pdns_carbon_info:
+  interval: '30'
+  ourname: '{{ ansible_hostname }}'
+  server: 'graphite.{{ pri_domain_name }}'
 pdns_curl_header: "-H 'X-API-Key: {{ pdns_api_key }}'"
 pdns_db_allow_access_from_hosts:  #defines hosts where {{ pdns_db_user }} can login from
   - '{{ ansible_hostname }}'
