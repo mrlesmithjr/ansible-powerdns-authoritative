@@ -24,7 +24,7 @@ pdns_auth_port: '53'
 pdns_carbon_info:
   interval: '30'
   ourname: '{{ ansible_hostname }}'
-  server: 'graphite.{{ pri_domain_name }}'
+  server: '192.168.200.201' # Must be defined as IP otherwise will not work
 pdns_curl_header: "-H 'X-API-Key: {{ pdns_api_key }}'"
 pdns_db_allow_access_from_hosts:  #defines hosts where {{ pdns_db_user }} can login from
   - '{{ ansible_hostname }}'
