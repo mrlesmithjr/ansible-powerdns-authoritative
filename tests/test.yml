@@ -26,7 +26,9 @@
         name: ['MySQL-python']
         state: present
       become: true
-      when: ansible_distribution != "Fedora"
+      when: >
+            ansible_os_family == "RedHat" and
+            ansible_distribution != "Fedora"
 
     - name: Installing MySQL
       yum:
@@ -34,8 +36,9 @@
         state: present
       become: true
       when: >
-            (ansible_distribution != "Fedora" and
-            ansible_distribution_version >= '7')
+            ansible_os_family == "RedHat" and
+            ansible_distribution != "Fedora" and
+            ansible_distribution_version >= '7'
 
     - name: Ensuring mariadb Service Is Started
       service:
@@ -44,6 +47,7 @@
         enabled: true
       become: true
       when: >
+            ansible_os_family == "RedHat" and
             (ansible_distribution == "CentOS" and
             ansible_distribution_version >= '7') or
             (ansible_distribution == "Fedora" and
