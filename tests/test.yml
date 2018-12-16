@@ -4,7 +4,7 @@
   pre_tasks:
     - name: Installing MySQL
       apt:
-        name: ['mysql-server']
+        name: ['mysql-server', 'python-mysqldb']
         state: present
       become: true
       when: >
@@ -39,6 +39,13 @@
             ansible_os_family == "RedHat" and
             ansible_distribution != "Fedora" and
             ansible_distribution_version >= '7'
+
+    - name: Ensuing MySQL Service Is Running
+      service:
+        name: mysql
+        state: started
+      become: true
+      when: ansible_os_family == "Debian"
 
     - name: Ensuring mariadb Service Is Started
       service:
