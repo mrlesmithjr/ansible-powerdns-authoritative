@@ -1,5 +1,23 @@
 ---
 - hosts: localhost
   connection: local
+  pre_tasks:
+    - name: Installing Pre-Reqs (Debian)
+      apt:
+        name: ['mysql']
+        state: present
+      become: true
+      when: ansible_os_family == "Debian"
+    - name: Installing Pre-Reqs (RedHat)
+      yum:
+        name: ['mysql']
+        state: present
+      become: true
+
+    - name: Ensuring MySQL Is Running
+      service:
+        name: mysql
+        state: running
+      become: true
   roles:
     - ansible-powerdns-authoritative
