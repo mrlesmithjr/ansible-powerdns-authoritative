@@ -2,22 +2,52 @@
 - hosts: localhost
   connection: local
   pre_tasks:
-    - name: Installing Pre-Reqs (Debian)
+    - name: Installing MySQL
       apt:
-        name: ['mysql']
+        name: ['mysql-server']
         state: present
       become: true
-      when: ansible_os_family == "Debian"
-    - name: Installing Pre-Reqs (RedHat)
-      yum:
-        name: ['mysql']
-        state: present
-      become: true
+      when: >
+            (ansible_distribution == "Debian" and
+            ansible_distribution_version < '9.0') or
+            (ansible_distribution == "Ubuntu")
 
-    - name: Ensuring MySQL Is Running
-      service:
-        name: mysql
-        state: running
+    - name: Installing MySQL
+      apt:
+        name: ['mariadb-server']
+        state: present
       become: true
+      when: >
+            (ansible_distribution == "Debian" and
+            ansible_distribution_version >= '9.0')
+
+    - name: Installing MySQL Pre-Reqs
+      yum:
+        name: ['MySQL-python']
+        state: present
+      become: true
+      when: ansible_distribution != "Fedora"
+
+    - name: Installing MySQL
+      yum:
+        name: ['mariadb', 'mariadb-server']
+        state: present
+      become: true
+      when: >
+            (ansible_distribution != "Fedora" and
+            ansible_distribution_version >= '7')
+
+    - name: Ensuring mariadb Service Is Started
+      service:
+        name: mariadb
+        state: started
+        enabled: true
+      become: true
+      when: >
+            (ansible_distribution == "CentOS" and
+            ansible_distribution_version >= '7') or
+            (ansible_distribution == "Fedora" and
+            (ansible_distribution_version <= "23" or
+            ansible_distribution_version >= "26"))
   roles:
     - ansible-powerdns-authoritative
