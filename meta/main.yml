@@ -3,7 +3,7 @@ galaxy_info:
   author: Larry Smith Jr.
   description: An Ansible role that installs/configures [PowerDNS] (MySQL cluster ready)
 
-  license: license (GPLv2, CC-BY, etc)
+  license: MIT
 
   min_ansible_version: 1.2
   platforms:
