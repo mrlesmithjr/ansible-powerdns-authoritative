@@ -1,7 +1,7 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [Role Name](#role-name)
+- [ansible-powerdns-authoritative](#ansible-powerdns-authoritative)
   - [Requirements](#requirements)
   - [Role Variables](#role-variables)
   - [Dependencies](#dependencies)
@@ -11,11 +11,13 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# Role Name
+# ansible-powerdns-authoritative
 
 An [Ansible](https://www.ansible.com) role that installs/configures [PowerDNS](https://www.powerdns.com/)
 
 - (MySQL cluster ready)
+
+[![Build Status](https://travis-ci.org/mrlesmithjr/ansible-powerdns-authoritative.svg?branch=master)](https://travis-ci.org/mrlesmithjr/ansible-powerdns-authoritative)
 
 ## Requirements
 
@@ -37,7 +39,7 @@ Reference requirements section above...
 
 ## License
 
-BSD
+MIT
 
 ## Author Information
 
