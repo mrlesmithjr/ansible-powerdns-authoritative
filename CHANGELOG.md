@@ -1,3 +1,11 @@
+commit 07b5480bff42bd7e9e01c5a7eb7f7cc79f6d147d
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Apr 9 15:09:05 2020 -0400
+
+    Rolling back version until further review
+    
+    4.3 fails to start service. Need to review this and figure out what is going on
+
 commit 8cd4624b1fcad76cf2bf01b7abaa508e93d18041
 Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Thu Apr 9 15:08:26 2020 -0400
