@@ -1,3 +1,9 @@
+commit 0c66e96be966e26afe72abf0c0cf703fc4602f6f
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Apr 9 09:34:36 2020 -0400
+
+    Cleaned up code formatting a bit
+
 commit da43a0cc0a9808f3fde8e3e98e94e3191db83dc4
 Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Thu Apr 9 09:33:52 2020 -0400
