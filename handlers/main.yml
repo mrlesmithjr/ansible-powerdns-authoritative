@@ -2,13 +2,13 @@
 # handlers file for ansible-powerdns-authoritative
 - name: restart pdns
   service:
-    name: "pdns"
-    state: "restarted"
+    name: pdns
+    state: restarted
     sleep: 10
   become: true
 
 - name: restart mysql
   service:
-    name: "mysql"
-    state: "restarted"
+    name: mysql
+    state: restarted
   become: true

@@ -1,31 +1,21 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
-- [ansible-powerdns-authoritative](#ansible-powerdns-authoritative)
-  - [Requirements](#requirements)
-  - [Role Variables](#role-variables)
-  - [Dependencies](#dependencies)
-  - [Example Playbook](#example-playbook)
-  - [License](#license)
-  - [Author Information](#author-information)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 # ansible-powerdns-authoritative
 
-An [Ansible](https://www.ansible.com) role that installs/configures [PowerDNS](https://www.powerdns.com/)
+Ansible role to install/configure PowerDNS Authoritative
 
-- (MySQL cluster ready)
+## Build Status
+
+### GitHub Actions
+
+![Molecule Test](https://github.com/mrlesmithjr/ansible-powerdns-authoritative/workflows/Molecule%20Test/badge.svg)
+
+### Travis CI
 
 [![Build Status](https://travis-ci.org/mrlesmithjr/ansible-powerdns-authoritative.svg?branch=master)](https://travis-ci.org/mrlesmithjr/ansible-powerdns-authoritative)
 
 ## Requirements
 
-Install required Ansible roles..
-
-```bash
-sudo ansible-galaxy install -r requirements.yml
-```
+For any required Ansible roles, review:
+[requirements.yml](requirements.yml)
 
 ## Role Variables
 
@@ -33,9 +23,9 @@ sudo ansible-galaxy install -r requirements.yml
 
 ## Dependencies
 
-Reference requirements section above...
-
 ## Example Playbook
+
+[playbook.yml](playbook.yml)
 
 ## License
 
@@ -45,6 +35,8 @@ MIT
 
 Larry Smith Jr.
 
-- [@mrlesmithjr](https://www.twitter.com/mrlesmithjr)
-- [EverythingShouldBeVirtual](http://everythingshouldbevirtual.com)
+- [@mrlesmithjr](https://twitter.com/mrlesmithjr)
 - [mrlesmithjr@gmail.com](mailto:mrlesmithjr@gmail.com)
+- [http://everythingshouldbevirtual.com](http://everythingshouldbevirtual.com)
+
+> NOTE: Repo has been created/updated using [https://github.com/mrlesmithjr/cookiecutter-ansible-role](https://github.com/mrlesmithjr/cookiecutter-ansible-role) as a template.

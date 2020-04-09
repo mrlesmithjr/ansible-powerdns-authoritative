@@ -171,7 +171,7 @@ pdns_auth_rev_zones: []
 # - 200.168.192.in-addr.arpa
 
 # This translates to 4.1 as they use shortened versions for repos
-pdns_auth_short_version: 41
+pdns_auth_short_version: 4.1
 
 # Defines version to install
 # To install 3.4.10-1 change to 3.4.10-1

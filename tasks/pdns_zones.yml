@@ -23,12 +23,12 @@
   delegate_to: localhost
   run_once: true
   become: false
-  with_items:
+  loop:
     - "{{ pdns_auth_fwd_zones }}"
     - "{{ pdns_auth_rev_zones }}"
   when: >
-        pdns_auth_fwd_zones is defined or
-        pdns_auth_rev_zones is defined
+    pdns_auth_fwd_zones is defined or
+    pdns_auth_rev_zones is defined
 
 - name: pdns_zones | creating pdns forward/reverse zones in zone folders
   template:
@@ -38,12 +38,23 @@
   run_once: true
   become: false
   register: pdns_zones_created
-  with_items:
+  loop:
     - "{{ pdns_auth_fwd_zones }}"
     - "{{ pdns_auth_rev_zones }}"
   when: >
-        pdns_auth_fwd_zones is defined or
-        pdns_auth_rev_zones is defined
+    pdns_auth_fwd_zones is defined or
+    pdns_auth_rev_zones is defined
+
+- name: pdns_zones | creating pdns zones script # noqa 503
+  template:
+    src: pdns_zones.sh.j2
+    dest: /tmp/pdns_zones.sh
+    owner: root
+    group: root
+    mode: 0770
+  when:
+    - pdns_zones_created['changed']
+    - pdns_auth_fwd_zones is defined or pdns_auth_rev_zones is defined
 
 - name: pdns_zones | creating pdns zones script
   template:
@@ -52,51 +63,32 @@
     owner: root
     group: root
     mode: 0770
-  when: >
-        pdns_zones_created['changed'] and
-        (pdns_auth_fwd_zones is defined or
-        pdns_auth_rev_zones is defined)
+  when:
+    - pdns_auth_fwd_zones is defined or pdns_auth_rev_zones is defined
 
-- name: pdns_zones | creating pdns zones script
-  template:
-    src: pdns_zones.sh.j2
-    dest: /tmp/pdns_zones.sh
-    owner: root
-    group: root
-    mode: 0770
-  when: >
-        (force is defined and
-        force) and
-        (pdns_auth_fwd_zones is defined or
-        pdns_auth_rev_zones is defined)
-
-- name: pdns_zones | creating pdns zones
+- name: pdns_zones | creating pdns zones # noqa 305 503
   shell: /tmp/pdns_zones.sh
   run_once: true
-  when: >
-        pdns_auth_db_cluster and
-        pdns_zones_created['changed']
+  when:
+    - pdns_auth_db_cluster|bool
+    - pdns_zones_created['changed']
 
-- name: pdns_zones | creating pdns zones
+- name: pdns_zones | creating pdns zones # noqa 305 503
   shell: /tmp/pdns_zones.sh
-  when: >
-        not pdns_auth_db_cluster and
-        pdns_zones_created['changed']
+  when:
+    - not pdns_auth_db_cluster|bool
+    - pdns_zones_created['changed']
 
-- name: pdns_zones | creating pdns zones
+- name: pdns_zones | creating pdns zones # noqa 305
   shell: /tmp/pdns_zones.sh
   run_once: true
-  when: >
-        pdns_auth_db_cluster and
-        (force is defined and
-        force)
+  when:
+    - pdns_auth_db_cluster|bool
 
-- name: pdns_zones | creating pdns zones
+- name: pdns_zones | creating pdns zones # noqa 305
   shell: /tmp/pdns_zones.sh
-  when: >
-        not pdns_auth_db_cluster and
-        (force is defined and
-        force)
+  when:
+    - not pdns_auth_db_cluster|bool
 
 - name: pdns_zones | cleaning up pdns zones script
   file:
@@ -108,6 +100,7 @@
   service:
     name: pdns
     state: stopped
+  become: true
 
 - name: pdns_server | waiting to stop
   pause:
@@ -117,3 +110,4 @@
   service:
     name: pdns
     state: started
+  become: true

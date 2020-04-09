@@ -5,5 +5,5 @@
     dest: /tmp/pdns_zones.sh
     mode: 0774
 
-- name: create_zones | configuring zones
+- name: create_zones | configuring zones # noqa 301
   command: /tmp/pdns_zones.sh

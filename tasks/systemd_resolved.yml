@@ -1,5 +1,5 @@
 ---
-- name: systemd_resolved | Checking If systemd-resolved Service Is Present
+- name: systemd_resolved | Checking If systemd-resolved Service Is Present # noqa 303
   command: systemctl status systemd-resolved.service
   register: _pdns_auth_systemd_resolved_check
   changed_when: false
@@ -21,17 +21,17 @@
     path: /etc/resolv.conf
   register: _pdns_auth_resolv_conf
 
-- name: systemd_resolved | Removing Existing /etc/resolv.conf If symlink
+- name: systemd_resolved | Removing Existing /etc/resolv.conf If symlink # noqa 503
   file:
     path: /etc/resolv.conf
     state: absent
   become: true
   register: _pdns_auth_resolv_conf_removed
-  when: >
-    _pdns_auth_systemd_resolved_disabled['changed'] and
-    _pdns_auth_resolv_conf['stat']['islnk']
+  when:
+    - _pdns_auth_systemd_resolved_disabled['changed']
+    - _pdns_auth_resolv_conf['stat']['islnk']
 
-- name: systemd_resolved | Creating /etc/resolv.conf
+- name: systemd_resolved | Creating /etc/resolv.conf # noqa 503
   template:
     src: etc/resolv.conf.j2
     dest: /etc/resolv.conf

@@ -15,7 +15,7 @@
 
 - name: redhat_pdns_server | installing powerdns pre-reqs
   yum:
-    name: ['bind-utils', 'git', 'jq', 'MySQL-python']
+    name: ["bind-utils", "git", "jq", "MySQL-python"]
     state: present
   become: true
   register: result
@@ -23,8 +23,8 @@
 
 - name: redhat_pdns_server | Installing PowerDNS 4.x Pre-Reqs
   yum:
-    name: ['epel-release', 'yum-plugin-priorities']
-    state: "present"
+    name: ["epel-release", "yum-plugin-priorities"]
+    state: present
   become: true
   register: result
   until: result is succeeded
@@ -32,22 +32,22 @@
 
 - name: redhat_pdns_auth | Adding PowerDNS Repo
   yum_repository:
-    name: "powerdns-auth-{{ pdns_auth_short_version }}"
+    name: "powerdns-auth-{{ pdns_auth_short_version|replace('.','') }}"
     description: PDNS-Auth
-    baseurl: "{{ pdns_auth_repo_baseurl }}/centos/$basearch/$releasever/auth-{{ pdns_auth_short_version }}"
+    baseurl: "{{ pdns_auth_repo_baseurl }}/centos/$basearch/$releasever/auth-{{ pdns_auth_short_version|replace('.','') }}"
     gpgcheck: yes
     gpgkey: "{{ pdns_auth_repo_gpgkey }}"
     enabled: yes
     includepkgs: "pdns*"
-    priority: 90
+    priority: "90"
     state: present
   become: true
   when: pdns_auth_version == "4.x"
 
 - name: redhat_pdns_server | Installing PowerDNS 4.x
   yum:
-    name: ['pdns', 'pdns-backend-mysql']
-    state: "present"
+    name: ["pdns", "pdns-backend-mysql"]
+    state: present
   become: true
   register: result
   until: result is succeeded

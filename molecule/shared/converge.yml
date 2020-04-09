@@ -1,0 +1,13 @@
+---
+- name: Converge
+  hosts: all
+  vars:
+    pdns_auth_enable_web_server: true
+  tasks:
+    - name: Include ansible-mysql
+      include_role:
+        name: ansible-mysql
+
+    - name: Include ansible-powerdns-authoritative
+      include_role:
+        name: ansible-powerdns-authoritative

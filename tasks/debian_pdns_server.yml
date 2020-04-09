@@ -1,7 +1,7 @@
 ---
 - name: debian_pdns_server | Installing PowerDNS Pre-Reqs
   apt:
-    name: ['dnsutils', 'git', 'jq', 'python-mysqldb']
+    name: ["dnsutils", "git", "jq", "python-mysqldb"]
     state: present
   become: true
   register: result
@@ -13,9 +13,9 @@
     state: present
   become: true
   notify: restart pdns
-  when: >
-        ansible_architecture == "x86_64" and
-        pdns_auth_version != "4.x"
+  when:
+    - ansible_architecture == "x86_64"
+    - pdns_auth_version != "4.x"
 
 - name: debian_pdns_server | Installing PowerDNS
   apt:
@@ -25,9 +25,9 @@
   register: result
   until: result is succeeded
   notify: restart pdns
-  when: >
-        ansible_architecture == "i386" and
-        pdns_auth_version != "4.x"
+  when:
+    - ansible_architecture == "i386"
+    - pdns_auth_version != "4.x"
 
 - name: debian_pdns_server | Adding PowerDNS Repo Key
   apt_key:
@@ -47,29 +47,29 @@
 
 - name: debian_pdns_server | Adding PowerDNS Repo
   apt_repository:
-    repo: "deb {{ pdns_auth_repo_baseurl }}/{{ ansible_distribution|lower }} {{ ansible_distribution_release|lower }}-auth-{{ pdns_auth_short_version }} main"
+    repo: "deb {{ pdns_auth_repo_baseurl }}/{{ ansible_distribution|lower }} {{ ansible_distribution_release|lower }}-auth-{{ pdns_auth_short_version|replace('.','') }} main" # noqa 204
     state: present
   become: true
   register: result
   until: result is succeeded
-  when: >
-        ansible_lsb['id'] != "Raspbian" and
-        pdns_auth_version == "4.x"
+  when:
+    - ansible_lsb['id'] != "Raspbian"
+    - pdns_auth_version == "4.x"
 
 - name: debian_pdns_server | Adding PowerDNS Repo
   apt_repository:
-    repo: "deb {{ pdns_auth_repo_baseurl }}/raspbian {{ ansible_distribution_release|lower }}-auth-{{ pdns_auth_short_version }} main"
+    repo: "deb {{ pdns_auth_repo_baseurl }}/raspbian {{ ansible_distribution_release|lower }}-auth-{{ pdns_auth_short_version|replace('.','') }} main"
     state: present
   become: true
   register: result
   until: result is succeeded
-  when: >
-        ansible_lsb['id'] == "Raspbian" and
-        pdns_auth_version == "4.x"
+  when:
+    - ansible_lsb['id'] == "Raspbian"
+    - pdns_auth_version == "4.x"
 
 - name: debian_pdns_server | Installing PowerDNS Authoritative 4.x
   apt:
-    name: ['pdns-server', 'pdns-backend-mysql']
+    name: ["pdns-server", "pdns-backend-mysql"]
     state: present
   become: true
   register: result
