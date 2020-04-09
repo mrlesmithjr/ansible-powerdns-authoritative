@@ -1,3 +1,11 @@
+commit 08b2e78ca0d0cac696c0f0f0f2f7c9b96e1269d8
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Apr 9 11:51:20 2020 -0400
+
+    Removed lingering force check
+    
+    Not sure where this ever came into play but it needed to go
+
 commit 60f2f4a4d31e292584b2ee3e84e72b3cb32f6bf2
 Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Thu Apr 9 11:23:59 2020 -0400

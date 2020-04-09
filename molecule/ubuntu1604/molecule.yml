@@ -15,6 +15,10 @@ platforms:
     image: jrei/systemd-ubuntu:16.04
     privileged: true
     command: /lib/systemd/systemd
+    exposed_ports:
+      - 8081/tcp
+    published_ports:
+      - 0.0.0.0:8081:8081/tcp
     # tmpfs:
     #   - /run
     #   - /tmp

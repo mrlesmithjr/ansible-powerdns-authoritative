@@ -1,6 +1,8 @@
 ---
 - name: Converge
   hosts: all
+  vars:
+    pdns_auth_enable_web_server: true
   tasks:
     - name: Include ansible-mysql
       include_role:

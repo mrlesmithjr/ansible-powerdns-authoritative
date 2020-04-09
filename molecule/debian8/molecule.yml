@@ -18,6 +18,10 @@ platforms:
     # tmpfs:
     #   - /run
     #   - /tmp
+    exposed_ports:
+      - 8081/tcp
+    published_ports:
+      - 0.0.0.0:8081:8081/tcp
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
 provisioner:

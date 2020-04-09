@@ -32,9 +32,9 @@
 
 - name: redhat_pdns_auth | Adding PowerDNS Repo
   yum_repository:
-    name: "powerdns-auth-{{ pdns_auth_short_version }}"
+    name: "powerdns-auth-{{ pdns_auth_short_version|replace('.','') }}"
     description: PDNS-Auth
-    baseurl: "{{ pdns_auth_repo_baseurl }}/centos/$basearch/$releasever/auth-{{ pdns_auth_short_version }}"
+    baseurl: "{{ pdns_auth_repo_baseurl }}/centos/$basearch/$releasever/auth-{{ pdns_auth_short_version|replace('.','') }}"
     gpgcheck: yes
     gpgkey: "{{ pdns_auth_repo_gpgkey }}"
     enabled: yes
