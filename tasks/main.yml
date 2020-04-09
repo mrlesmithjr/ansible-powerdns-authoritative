@@ -10,15 +10,11 @@
 - include_tasks: pdns_server.yml
 
 - include_tasks: pdns_zones.yml
-  tags:
-    - pdns_auth_create_pdns_zones
   when:
     - pdns_auth_create_pdns_zones is defined
     - pdns_auth_create_pdns_zones|bool
 
 - include_tasks: pdns_records.yml
-  tags:
-    - pdns_auth_create_records
   when:
     - pdns_auth_create_records is defined
     - pdns_auth_create_records|bool
