@@ -1,3 +1,17 @@
+commit c039a7d98c440160ce247ab551d46e41ce6ba274
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Apr 9 09:32:48 2020 -0400
+
+    Tweaked Molecule testing
+    
+    Added MySQL role req. and disabled Fedora testing for now
+
+commit 82f9292a59899b38c858c8a05851691956264276
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Apr 9 01:42:27 2020 -0400
+
+    Added: New files, etc. from cookiecutter template
+
 commit 642c118376f7b13dd51fae945293e63868642aa7
 Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Thu Apr 9 01:42:05 2020 -0400
