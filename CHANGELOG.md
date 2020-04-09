@@ -1,3 +1,11 @@
+commit 2a5c7d4e7124618c01c97451ddc4b677b69c48a7
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Apr 9 09:50:49 2020 -0400
+
+    Disabled Debian 9/10 testing
+    
+    Issues with importing DB schema and adding package for Debian 10
+
 commit 0c66e96be966e26afe72abf0c0cf703fc4602f6f
 Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Thu Apr 9 09:34:36 2020 -0400

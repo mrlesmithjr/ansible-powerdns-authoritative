@@ -24,7 +24,7 @@
 - name: redhat_pdns_server | Installing PowerDNS 4.x Pre-Reqs
   yum:
     name: ["epel-release", "yum-plugin-priorities"]
-    state: "present"
+    state: present
   become: true
   register: result
   until: result is succeeded
@@ -47,7 +47,7 @@
 - name: redhat_pdns_server | Installing PowerDNS 4.x
   yum:
     name: ["pdns", "pdns-backend-mysql"]
-    state: "present"
+    state: present
   become: true
   register: result
   until: result is succeeded

@@ -13,9 +13,9 @@
     state: present
   become: true
   notify: restart pdns
-  when: >
-    ansible_architecture == "x86_64" and
-    pdns_auth_version != "4.x"
+  when:
+    - ansible_architecture == "x86_64"
+    - pdns_auth_version != "4.x"
 
 - name: debian_pdns_server | Installing PowerDNS
   apt:
@@ -25,9 +25,9 @@
   register: result
   until: result is succeeded
   notify: restart pdns
-  when: >
-    ansible_architecture == "i386" and
-    pdns_auth_version != "4.x"
+  when:
+    - ansible_architecture == "i386"
+    - pdns_auth_version != "4.x"
 
 - name: debian_pdns_server | Adding PowerDNS Repo Key
   apt_key:
@@ -52,9 +52,9 @@
   become: true
   register: result
   until: result is succeeded
-  when: >
-    ansible_lsb['id'] != "Raspbian" and
-    pdns_auth_version == "4.x"
+  when:
+    - ansible_lsb['id'] != "Raspbian"
+    - pdns_auth_version == "4.x"
 
 - name: debian_pdns_server | Adding PowerDNS Repo
   apt_repository:
@@ -63,9 +63,9 @@
   become: true
   register: result
   until: result is succeeded
-  when: >
-    ansible_lsb['id'] == "Raspbian" and
-    pdns_auth_version == "4.x"
+  when:
+    - ansible_lsb['id'] == "Raspbian"
+    - pdns_auth_version == "4.x"
 
 - name: debian_pdns_server | Installing PowerDNS Authoritative 4.x
   apt:

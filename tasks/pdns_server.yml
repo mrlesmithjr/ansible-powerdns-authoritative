@@ -27,9 +27,9 @@
   become: true
   notify: restart pdns
   register: pdns_configured_2
-  when: >
-    (ansible_os_family == "RedHat" and
-    pdns_auth_version == "4.x")
+  when:
+    - ansible_os_family == "RedHat"
+    - pdns_auth_version == "4.x"
 
 - name: pdns_server | ensuring pdns service is enabled
   service:
@@ -66,7 +66,7 @@
     name: "{{ pdns_auth_db_name }}"
     state: present
   become: true
-  when: not pdns_auth_db_cluster
+  when: not pdns_auth_db_cluster|bool
 
 - name: pdns_server | creating powerdns db
   mysql_db:
@@ -74,7 +74,7 @@
     state: present
   become: true
   run_once: true
-  when: pdns_auth_db_cluster
+  when: pdns_auth_db_cluster|bool
 
 - name: pdns_server | creating powerdns user
   mysql_user:
@@ -84,8 +84,8 @@
     host: "{{ item }}"
     state: present
   become: true
-  with_items: "{{ pdns_auth_db_allow_access_from_hosts }}"
-  when: not pdns_auth_db_cluster
+  loop: "{{ pdns_auth_db_allow_access_from_hosts }}"
+  when: not pdns_auth_db_cluster|bool
 
 - name: pdns_server | creating powerdns user
   mysql_user:
@@ -96,8 +96,8 @@
     state: present
   become: true
   run_once: true
-  with_items: "{{ pdns_auth_db_allow_access_from_hosts }}"
-  when: pdns_auth_db_cluster
+  loop: "{{ pdns_auth_db_allow_access_from_hosts }}"
+  when: pdns_auth_db_cluster|bool
 
 - name: pdns_server | copying db schema file
   copy:
@@ -124,9 +124,9 @@
     state: import
     target: /tmp/db_schema
   become: true
-  when: >
-    not pdns_auth_db_cluster and
-    ('domains' not in pdns_tables['stdout_lines'])
+  when:
+    - not pdns_auth_db_cluster|bool
+    - ('domains' not in pdns_tables['stdout_lines'])
 
 - name: pdns_server | importing db schema
   mysql_db:
@@ -138,9 +138,9 @@
     target: /tmp/db_schema
   become: true
   run_once: true
-  when: >
-    pdns_auth_db_cluster and
-    ('domains' not in pdns_tables['stdout_lines'])
+  when:
+    - pdns_auth_db_cluster|bool
+    - ('domains' not in pdns_tables['stdout_lines'])
 
 - name: pdns_server | ensuring pdns server is running and enabled on boot
   service:

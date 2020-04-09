@@ -23,7 +23,7 @@
   delegate_to: localhost
   run_once: true
   become: false
-  with_items: "{{ pdns_auth_records }}"
+  loop: "{{ pdns_auth_records }}"
 
 - name: pdns_auth_records | creating pdns records in zones folders
   template:
@@ -33,7 +33,7 @@
   run_once: true
   become: false
   register: pdns_auth_records_created
-  with_items: "{{ pdns_auth_records }}"
+  loop: "{{ pdns_auth_records }}"
   when: item['type'] != "SRV"
 
 - name: pdns_auth_records | creating pdns SRV records in zones folders
@@ -44,7 +44,7 @@
   run_once: true
   become: false
   register: pdns_srv_records_created
-  with_items: "{{ pdns_auth_records }}"
+  loop: "{{ pdns_auth_records }}"
   when: item['type'] == "SRV"
 
 - name: pdns_auth_records | creating pdns records script # noqa 503
@@ -65,39 +65,37 @@
     owner: root
     group: root
     mode: 0770
-  when: >
-    force is defined and
-    force
+  when:
+    - force is defined
+    - force|bool
 
 - name: pdns_auth_records | creating pdns records # noqa 305 503
   shell: /tmp/pdns_records.sh
   run_once: true
-  when: >
-    pdns_auth_db_cluster and
-    (pdns_auth_records_created['changed'] or
-    pdns_srv_records_created['changed'])
+  when:
+    - pdns_auth_db_cluster|bool
+    - pdns_auth_records_created['changed'] or pdns_srv_records_created['changed']
 
 - name: pdns_auth_records | creating pdns records # noqa 305 503
   shell: /tmp/pdns_records.sh
-  when: >
-    not pdns_auth_db_cluster and
-    (pdns_auth_records_created['changed'] or
-    pdns_srv_records_created['changed'])
+  when:
+    - not pdns_auth_db_cluster|bool
+    - pdns_auth_records_created['changed'] or pdns_srv_records_created['changed']
 
 - name: pdns_auth_records | creating pdns records # noqa 305
   shell: /tmp/pdns_records.sh
   run_once: true
-  when: >
-    pdns_auth_db_cluster and
-    (force is defined and
-    force)
+  when:
+    - pdns_auth_db_cluster|bool
+    - force is defined
+    - force|bool
 
 - name: pdns_auth_records | creating pdns records # noqa 305
   shell: /tmp/pdns_records.sh
-  when: >
-    not pdns_auth_db_cluster and
-    (force is defined and
-    force)
+  when:
+    - not pdns_auth_db_cluster|bool
+    - force is defined
+    - force|bool
 
 - name: pdns_records | cleaning up pdns records script
   file:
