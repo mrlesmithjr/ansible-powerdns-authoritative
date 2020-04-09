@@ -15,7 +15,7 @@
 
 - name: redhat_pdns_server | installing powerdns pre-reqs
   yum:
-    name: ['bind-utils', 'git', 'jq', 'MySQL-python']
+    name: ["bind-utils", "git", "jq", "MySQL-python"]
     state: present
   become: true
   register: result
@@ -23,7 +23,7 @@
 
 - name: redhat_pdns_server | Installing PowerDNS 4.x Pre-Reqs
   yum:
-    name: ['epel-release', 'yum-plugin-priorities']
+    name: ["epel-release", "yum-plugin-priorities"]
     state: "present"
   become: true
   register: result
@@ -46,7 +46,7 @@
 
 - name: redhat_pdns_server | Installing PowerDNS 4.x
   yum:
-    name: ['pdns', 'pdns-backend-mysql']
+    name: ["pdns", "pdns-backend-mysql"]
     state: "present"
   become: true
   register: result
