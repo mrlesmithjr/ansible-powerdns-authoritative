@@ -65,9 +65,6 @@
     owner: root
     group: root
     mode: 0770
-  when:
-    - force is defined
-    - force|bool
 
 - name: pdns_auth_records | creating pdns records # noqa 305 503
   shell: /tmp/pdns_records.sh
@@ -87,15 +84,11 @@
   run_once: true
   when:
     - pdns_auth_db_cluster|bool
-    - force is defined
-    - force|bool
 
 - name: pdns_auth_records | creating pdns records # noqa 305
   shell: /tmp/pdns_records.sh
   when:
     - not pdns_auth_db_cluster|bool
-    - force is defined
-    - force|bool
 
 - name: pdns_records | cleaning up pdns records script
   file:
