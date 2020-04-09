@@ -39,7 +39,7 @@
     gpgkey: "{{ pdns_auth_repo_gpgkey }}"
     enabled: yes
     includepkgs: "pdns*"
-    priority: 90
+    priority: "90"
     state: present
   become: true
   when: pdns_auth_version == "4.x"
