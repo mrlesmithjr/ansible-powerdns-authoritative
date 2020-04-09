@@ -1,3 +1,15 @@
+commit 8cd4624b1fcad76cf2bf01b7abaa508e93d18041
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Apr 9 15:08:26 2020 -0400
+
+    Fixing Ansible notification for priority being an int
+
+commit eef9a435e3ad564fdba7fc9764df62b7f9f237c5
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Apr 9 14:28:52 2020 -0400
+
+    Exposed ports and updated version
+
 commit 08b2e78ca0d0cac696c0f0f0f2f7c9b96e1269d8
 Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Thu Apr 9 11:51:20 2020 -0400
