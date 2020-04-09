@@ -1,0 +1,7 @@
+---
+- name: Example Playbook
+  hosts: all
+  tasks:
+    - name: Include ansible-powerdns-authoritative
+      include_role:
+        name: ansible-powerdns-authoritative
